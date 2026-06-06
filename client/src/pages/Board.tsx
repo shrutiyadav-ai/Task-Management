@@ -23,13 +23,13 @@ import { useSocket } from '../context/SocketContext';
 import { useAuth } from '../context/AuthContext';
 import { 
   DndContext, 
-  DragEndEvent, 
   useSensor, 
   useSensors, 
   PointerSensor, 
   KeyboardSensor,
   closestCorners
 } from '@dnd-kit/core';
+import type { DragEndEvent } from '@dnd-kit/core';
 import { 
   SortableContext, 
   arrayMove, 
