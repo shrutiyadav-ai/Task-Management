@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: kanban-postgres
+    restart: always
+    environment:
+      POSTGRES_DB: kanban_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - '5432:5432'
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    container_name: kanban-server
+    restart: always
+    ports:
+      - '4000:4000'
+    environment:
+      - PORT=4000
+      - DATABASE_URL=postgresql://postgres:postgres@postgres:5432/kanban_db?schema=public
+      - JWT_SECRET=production_secret_keys_collaborative_board_99887766
+      - NODE_ENV=production
+    depends_on:
+      - postgres
+
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    container_name: kanban-client
+    restart: always
+    ports:
+      - '8080:80'
+    depends_on:
+      - server
+
+volumes:
+  postgres_data:
