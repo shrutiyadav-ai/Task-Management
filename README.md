@@ -30,24 +30,24 @@ A production-grade, real-time collaborative Kanban board (similar to Trello/Jira
 
 ```mermaid
 graph TD
-    subgraph Client [Vite React Client]
-        Vite[Vite + TS]
-        React[React Core]
-        Dnd[@dnd-kit Drag-and-Drop]
-        ApolloClient[Apollo Client Cache]
-        SocketClient[Socket.io-client]
+    subgraph Client ["Vite React Client"]
+        Vite["Vite + TS"]
+        React["React Core"]
+        Dnd["@dnd-kit Drag-and-Drop"]
+        ApolloClient["Apollo Client Cache"]
+        SocketClient["Socket.io-client"]
         
         React --> Dnd
         React --> ApolloClient
         React --> SocketClient
     end
 
-    subgraph Server [Node.js Backend]
-        Express[Express Server]
-        ApolloServer[Apollo Server GraphQL]
-        SocketServer[Socket.io Server]
-        RBAC[RBAC Guards]
-        Prisma[Prisma Client]
+    subgraph Server ["Node.js Backend"]
+        Express["Express Server"]
+        ApolloServer["Apollo Server GraphQL"]
+        SocketServer["Socket.io Server"]
+        RBAC["RBAC Guards"]
+        Prisma["Prisma Client"]
 
         Express --> ApolloServer
         Express --> SocketServer
@@ -55,8 +55,8 @@ graph TD
         ApolloServer --> Prisma
     end
 
-    subgraph Storage [Database]
-        SQLite[(SQLite file: dev.db)]
+    subgraph Storage ["Database"]
+        SQLite["SQLite (dev.db)"]
     end
 
     ApolloClient -- "GraphQL Queries & Mutations" --> ApolloServer
