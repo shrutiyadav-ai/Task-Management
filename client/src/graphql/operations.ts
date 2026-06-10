@@ -104,6 +104,16 @@ export const BOARD_QUERY = gql`
             name
             avatarUrl
           }
+          comments {
+            id
+            text
+            createdAt
+            user {
+              id
+              name
+              avatarUrl
+            }
+          }
         }
       }
       labels {
